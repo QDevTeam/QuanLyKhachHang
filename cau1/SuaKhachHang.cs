@@ -13,6 +13,7 @@ namespace cau1
 {
     public partial class SuaKhachHang : Form
     {
+        private bool hasChanges = false;
         Form1 main = new Form1();
         public khachhang SuaThongTinKH { get; set; }
         xuly xl = new xuly();
@@ -26,8 +27,13 @@ namespace cau1
             sua_ngaysinh.Text = tt.NgaySinh.ToString("yyyy/MM/dd");
             sua_diachi.Text = tt.DiaChi.ToString();
             sua_sdt.Text = tt.SDT.ToString();
+            this.FormClosing += SuaKhachHang_FormClosing;
+            this.KeyPreview = true;
         }
-
+        private void SuaKhachHang_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form1.isDataUpdated = true;
+        }
         private void SuaKhachHang_Load(object sender, EventArgs e)
         {
             this.Text = "Sửa khách hàng mã: " + Form1.selectrow;
@@ -45,6 +51,7 @@ namespace cau1
                 SuaThongTinKH.DiaChi = sua_diachi.Text;
                 SuaThongTinKH.SDT = sua_sdt.Text;
                 khachhang kh = SuaThongTinKH;
+            this.KeyPreview = true;
                 bool value = xl.SuaKhachHang(kh);
                 if (value)
                 {
@@ -61,7 +68,7 @@ namespace cau1
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi Dữ Liệu!", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi Dữ Liệu!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             sua_click.Enabled = true;
         }
@@ -80,7 +87,7 @@ namespace cau1
             else e.Cancel = true;
             if (e.Cancel)
             {
-                if (MessageBox.Show("Vui lòng nhập đúng định dạng năm/tháng/ngày", "Lỗi Dữ Liệu!", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.Cancel)
+                if (MessageBox.Show("Vui lòng nhập đúng định dạng năm/tháng/ngày", "Lỗi Dữ Liệu!", MessageBoxButtons.OK, MessageBoxIcon.Error) == DialogResult.Cancel)
                     e.Cancel = false;
             }
         }
@@ -110,6 +117,46 @@ namespace cau1
             }
 
             return isValid;
+        }
+
+        private void sua_tenkhachhang_TextChanged(object sender, EventArgs e)
+        {
+            hasChanges = true;
+        }
+
+        private void sua_ngaysinh_TextChanged(object sender, EventArgs e)
+        {
+            hasChanges = true;
+        }
+
+        private void sua_diachi_TextChanged(object sender, EventArgs e)
+        {
+            hasChanges = true;
+        }
+
+        private void sua_sdt_TextChanged(object sender, EventArgs e)
+        {
+            hasChanges = true;
+        }
+
+        private void SuaKhachHang_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            if (hasChanges)
+            {
+                DialogResult result = MessageBox.Show("Bạn có thay đổi chưa lưu. Bạn có chắc muốn đóng form?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void SuaKhachHang_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                sua_click_Click(sender, e);
+            }
         }
     }
 }

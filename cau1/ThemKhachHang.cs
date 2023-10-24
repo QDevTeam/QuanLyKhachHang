@@ -17,6 +17,7 @@ namespace cau1
             MaximizeBox = false;
             WindowState = FormWindowState.Normal;
             this.FormClosing += ThemKhachHang_FormClosing;
+            this.KeyPreview = true;
         }
         private void ThemKhachHang_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -24,7 +25,7 @@ namespace cau1
         }
         private void them_click_Click(object sender, EventArgs e)
         {
-            
+
             them_click.Enabled = false;
             if (IsValid())
             {
@@ -35,7 +36,7 @@ namespace cau1
                 ThongTinKhachHang.SDT = them_sdt.Text;
                 khachhang kh = ThongTinKhachHang;
                 int value = xl.ThemMoiKhachHang(kh);
-                if(value == 1)
+                if (value == 1)
                 {
                     if (MessageBox.Show("Thêm Khách Hàng Thành Công, bạn có muốn đóng form!", "Thành Công!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -51,7 +52,7 @@ namespace cau1
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi Dữ Liệu!", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi Dữ Liệu!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             them_click.Enabled = true;
         }
@@ -70,7 +71,7 @@ namespace cau1
             else e.Cancel = true;
             if (e.Cancel)
             {
-                if (MessageBox.Show("Vui lòng nhập đúng định dạng năm/tháng/ngày", "Lỗi Dữ Liệu!", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.Cancel)
+                if (MessageBox.Show("Vui lòng nhập đúng định dạng năm/tháng/ngày", "Lỗi Dữ Liệu!", MessageBoxButtons.OK, MessageBoxIcon.Error) == DialogResult.Cancel)
                     e.Cancel = false;
             }
         }
@@ -107,6 +108,14 @@ namespace cau1
             them_ngaysinh.Text = "";
             them_diachi.Text = "";
             them_sdt.Text = "";
+        }
+
+        private void ThemKhachHang_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                them_click_Click(sender, e);
+            }
         }
     }
 }

@@ -69,6 +69,7 @@
             sua_sdt.Name = "sua_sdt";
             sua_sdt.Size = new Size(373, 33);
             sua_sdt.TabIndex = 18;
+            sua_sdt.TextChanged += sua_sdt_TextChanged;
             // 
             // label5
             // 
@@ -87,6 +88,7 @@
             sua_diachi.Name = "sua_diachi";
             sua_diachi.Size = new Size(373, 33);
             sua_diachi.TabIndex = 16;
+            sua_diachi.TextChanged += sua_diachi_TextChanged;
             // 
             // label4
             // 
@@ -105,6 +107,7 @@
             sua_ngaysinh.Name = "sua_ngaysinh";
             sua_ngaysinh.Size = new Size(373, 33);
             sua_ngaysinh.TabIndex = 14;
+            sua_ngaysinh.TextChanged += sua_ngaysinh_TextChanged;
             sua_ngaysinh.Validating += sua_ngaysinh_Validating;
             // 
             // label3
@@ -124,6 +127,7 @@
             sua_tenkhachhang.Name = "sua_tenkhachhang";
             sua_tenkhachhang.Size = new Size(373, 33);
             sua_tenkhachhang.TabIndex = 12;
+            sua_tenkhachhang.TextChanged += sua_tenkhachhang_TextChanged;
             // 
             // label2
             // 
@@ -152,7 +156,9 @@
             Controls.Add(label1);
             Name = "SuaKhachHang";
             Text = "SuaKhachHang";
+            FormClosing += SuaKhachHang_FormClosing_1;
             Load += SuaKhachHang_Load;
+            KeyDown += SuaKhachHang_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }

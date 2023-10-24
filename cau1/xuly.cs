@@ -27,10 +27,13 @@ namespace cau1
             }
             return false;
         }
-
+        public List<khachhang> TimKiemKH(string tenKH)
+        {
+            return data.TimKiemKH(tenKH);
+        }
         public bool XoaKhachHang(string maKH)
         {
-            return true;
+            return db.XoaKhachHang(maKH);
         }
 
         public khachhang LayThongTinKH(int MaKH)
@@ -41,23 +44,23 @@ namespace cau1
         {
             if (!IsFullNameValid(kh.TenKH))
             {
-                MessageBox.Show("Tên KH không hợp lệ");
+                MessageBox.Show("Tên KH không hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             if (kh.NgaySinh > DateTime.Today || !IsValidDate(kh.NgaySinh.ToString()))
             {
-                MessageBox.Show("Ngày sinh không hợp lệ");
+                MessageBox.Show("Ngày sinh không hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (!IsAddressValid(kh.DiaChi))
             {
-                MessageBox.Show("Địa chỉ không hợp lệ");
+                MessageBox.Show("Địa chỉ không hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (!IsPhoneNumberValid(kh.SDT))
             {
-                MessageBox.Show("Số điện thoại không hợp lệ");
+                MessageBox.Show("Số điện thoại không hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 

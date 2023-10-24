@@ -159,6 +159,7 @@
             Controls.Add(label1);
             Name = "ThemKhachHang";
             Text = "ThemKhachHang";
+            KeyDown += ThemKhachHang_KeyDown;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

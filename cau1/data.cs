@@ -186,6 +186,41 @@ namespace cau1
             }
             return tt;
         }
+        public static List<khachhang> TimKiemKH(string ten)
+        {
+            List<khachhang> list = new List<khachhang>();
+            try
+            {
+                db.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = db;
+                cmd.CommandText = "SELECT * FROM KhachHang WHERE HoTen LIKE '%"+ten+"%'";
+                cmd.Parameters.AddWithValue("@tenKH", ten.ToString());
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    khachhang kh = new khachhang();
+                    kh.MaKH = reader["MaKH"].ToString();
+                    kh.TenKH = reader["HoTen"].ToString();
+                    kh.NgaySinh = (DateTime)reader["NgaySinh"];
+                    kh.DiaChi = reader["DiaChi"].ToString();
+                    kh.SDT = reader["SDT"].ToString();
+
+                    list.Add(kh);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                db.Close();
+            }
+            return list;
+        }
 
     }
 }
