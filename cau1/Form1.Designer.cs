@@ -33,6 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             label1 = new Label();
             dataGridView1 = new DataGridView();
             button1 = new Button();
@@ -60,7 +61,7 @@
             label1.BackColor = Color.Bisque;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.Highlight;
-            label1.Location = new Point(119, 29);
+            label1.Location = new Point(138, 29);
             label1.Name = "label1";
             label1.Size = new Size(330, 45);
             label1.TabIndex = 0;
@@ -278,9 +279,10 @@
             Controls.Add(label1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "Form1";
-            Text = "Quản Lý Khách Hàng";
+            Text = " ";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             KeyDown += Form1_KeyDown;

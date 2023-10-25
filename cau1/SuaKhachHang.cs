@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -121,7 +122,7 @@ namespace cau1
 
         private void sua_tenkhachhang_TextChanged(object sender, EventArgs e)
         {
-            hasChanges = true;
+                hasChanges = true;
         }
 
         private void sua_ngaysinh_TextChanged(object sender, EventArgs e)

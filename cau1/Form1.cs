@@ -10,6 +10,7 @@ namespace cau1
 
     public partial class Form1 : Form
     {
+
         xuly xl = new xuly();
         public static bool isDataUpdated = false;
         public static int selectrow, rowindex = 0;
@@ -28,10 +29,13 @@ namespace cau1
             dataGridView1.Columns[2].HeaderText = "Ngày Sinh";
             dataGridView1.Columns[3].HeaderText = "Địa Chỉ";
             dataGridView1.Columns[4].HeaderText = "SĐT";
+            button2.Enabled = false;
+            button3.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Text = "Hệ Thống Quản Lý Khách Hàng";
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -280,14 +284,16 @@ namespace cau1
                             worksheet.Cells[i + 2, j + 1].Value = dataGridView1.Rows[i].Cells[j].Value;
                         }
                     }
-
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "Excel Files|*.xlsx";
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    this.Invoke((MethodInvoker)delegate
                     {
-                        package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
-                        MessageBox.Show("Dữ liệu đã được xuất ra tệp Excel thành công.");
-                    }
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "Excel Files|*.xlsx";
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
+                            MessageBox.Show("Dữ liệu đã được xuất ra tệp Excel thành công.");
+                        }
+                    });
                 }
             }
             catch (Exception ex)
@@ -322,6 +328,7 @@ namespace cau1
         }
         private void ShowContact()
         {
+            string edgePath = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"; // Đường dẫn cài đặt Microsoft Edge
             string message = "Liên hệ với tôi qua Facebook: @Quancp72h\n\n";
             string facebookLink = "https://www.facebook.com/quancp72h";
 
@@ -330,7 +337,7 @@ namespace cau1
             {
                 try
                 {
-                    Process.Start(facebookLink);
+                    Process.Start(edgePath, facebookLink);
                 }
                 catch (Exception ex)
                 {
